@@ -1,0 +1,9 @@
+options:
+  fade-enabled: true
+  fade-time: 5
+  intensity-modifier: 2
+  minimum-health: -1
+  enabled: true
+  debug: false
+damage-mode:
+  enabled: false

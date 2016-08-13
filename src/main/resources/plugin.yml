@@ -1,0 +1,29 @@
+name: TintHealth
+version: ${project.version}
+main: fr.mrsheepsheep.tinthealth.TintHealth
+authors: [MrSheepSheep, MrCookieSlime]
+description: Blood screen effects !
+commands:
+    tinthealth:
+        description: TintHealth base command
+        aliases: [th, tint]
+        usage: /tinthealth <subcommand>
+permissions:
+    tinthealth.*:
+        description: Give all Tint Health commands
+        children:
+            tinthealth.reload: true
+            tinthealth.toggle: true
+            tinthealth.fade: true
+    tinthealth.reload:
+        description: Reloads TintHealth configuration
+        default: op
+    tinthealth.toggle:
+        description: Allow usage of /tinthealth toggle command
+        default: false
+    tinthealth.fade:
+        description: Allow usage of fade mode
+        default: true
+    tinthealth.blood:
+        description: Allow usage of /tint blood, which installs the blood texture.
+        default: true

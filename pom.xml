@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2015 Souleau Alexandre mrsheepsheepandcie@gmail.com
+  ~
+  ~ Tint Health is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or at your option) any later version.
+  ~
+  ~ Tint Health is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See http://www.gnu.org/licenses/ for more details.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.mrsheepsheep</groupId>
+    <artifactId>TintHealth</artifactId>
+    <version>1.4.3</version>
+    <packaging>jar</packaging>
+
+    <name>TintHealth</name>
+
+    <description>Blood screen effects !</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+        <plugins>
+            <plugin>
+                <version>3.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.10.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

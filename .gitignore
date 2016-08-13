@@ -1,4 +1,7 @@
 target/
+.idea/
+src/test/
+TintHealthUpdated.iml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
