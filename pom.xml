@@ -14,7 +14,7 @@
 
     <groupId>fr.mrsheepsheep</groupId>
     <artifactId>TintHealth</artifactId>
-    <version>1.4.3</version>
+    <version>1.4.6</version>
     <packaging>jar</packaging>
 
     <name>TintHealth</name>

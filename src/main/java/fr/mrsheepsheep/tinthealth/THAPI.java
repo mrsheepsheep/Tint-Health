@@ -11,67 +11,61 @@ package fr.mrsheepsheep.tinthealth;
 import org.bukkit.entity.Player;
 
 public class THAPI {
-
-//	API access: 
-//
-//	TintHealth th = (TintHealth) plugin.getServer().getPluginManager().getPlugin("TintHealth");
-//	THAPI api = th.getAPI();
-//  Then use api to call methods listed here.
-//  If you want a new API method, ask on the plugin discussion:
-//  http://www.spigotmc.org/threads/tint-health.62428/
 	
-	private TintHealth plugin;
-	private THFunctions functions;
+	/**
+	 * This API is static, simply call it from anywhere
+	 * with THAPI.methodName
+	 * If you want a new API method, ask on the plugin discussion:
+	 * http://www.spigotmc.org/threads/tint-health.62428/
+	 */
 	
-	protected THAPI(TintHealth plugin){
-		this.plugin = plugin;
-		this.functions = plugin.functions;
-	}
-
-	public void setTint(Player p, int percentage){
+	private static TintHealth plugin = TintHealth.getInstance();
+	private static THFunctions functions = plugin.functions;
+	
+	public static void setTint(Player p, int percentage){
 		// Sets the tint to percentage (eg. 95% of red).
 		functions.setBorder(p, 100 - percentage);
 	}
 	
-	public void fadeTint(Player p, int startpercentage, int timeInSeconds){
+	public static void fadeTint(Player p, int startpercentage, int timeInSeconds){
 		// Fades the tint from startpercentage (eg. 95% of red) to 0 (no red)
 		// Does not check permissions.
 		functions.fadeBorder(p, 100 - startpercentage, timeInSeconds);
 	}
 	
-	public void removeTint(Player p){
+	public static void removeTint(Player p){
 		// Sets the tint to 0.
 		functions.removeBorder(p);
 	}
 	
-	public int getIntensityModifier(){
+	public static int getIntensityModifier(){
 		return plugin.intensity;
 	}
 	
-	public boolean isFadeEnabled(){
+	public static boolean isFadeEnabled(){
 		return plugin.fade;
 	}
 	
-	public int getFadeTime(){
+	public static int getFadeTime(){
 		return plugin.fadetime;
 	}
 	
-	public void sendTint(Player p, int percentage){
+	public static void sendTint(Player p, int percentage){
 		// This sends a tint percentage to the player then fades it using the plugin configuration.
 		// It also detects if fade mode is enabled.
 		functions.sendBorder(p, 100 - percentage);
 	}
 	
-	public boolean isTHEnabled(){
+	public static boolean isTHEnabled(){
 		return plugin.enabled;
 	}
 	
-	public void enable(){
+	public static void enable(){
 		// Enables default plugin behavior if disabled
 		plugin.enabled = true;
 	}
 	
-	public void disable(){
+	public static void disable(){
 		// Disables default plugin behavior
 		plugin.enabled = false;
 	}

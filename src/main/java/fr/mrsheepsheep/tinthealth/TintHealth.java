@@ -8,6 +8,7 @@
 
 package fr.mrsheepsheep.tinthealth;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public final class TintHealth extends JavaPlugin {
     
+    private static TintHealth plugin;
     public THFunctions functions;
     public boolean fade = false;
     protected int fadetime = 5;
@@ -28,8 +30,13 @@ public final class TintHealth extends JavaPlugin {
     protected boolean enabled = true;
     protected boolean debug = false;
     
+    public static TintHealth getInstance() {
+        return plugin;
+    }
+    
     @Override
     public void onEnable() {
+        this.plugin = this;
         loadMetrics();
         loadConfig();
         loadPlayerToggles();
@@ -37,6 +44,8 @@ public final class TintHealth extends JavaPlugin {
         if (enabled)
             new PlayerListener(this);
         getCommand("tinthealth").setExecutor(new THCommand(this));
+    
+        Bukkit.getLogger().info(THAPI.isTHEnabled() + " / " + THAPI.getIntensityModifier());
     }
     
     @Override
