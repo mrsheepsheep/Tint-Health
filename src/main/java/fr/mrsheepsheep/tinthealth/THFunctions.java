@@ -8,20 +8,15 @@
 
 package fr.mrsheepsheep.tinthealth;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Player;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Player;
-
-// Todo: get rid of this
-import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
-import net.minecraft.server.v1_12_R1.WorldBorder;
 
 public class THFunctions {
 	
@@ -117,18 +112,19 @@ public class THFunctions {
 //			New Reflection Version
 //		
 		try {
-			// Todo: Reflection stuff
-			Object worldborder = border_constructor.newInstance();
+			Object wb = border_constructor.newInstance();
 			
-			WorldBorder wb = (WorldBorder) worldborder;
-			wb.world = ((CraftWorld)((CraftPlayer) p).getHandle().getBukkitEntity().getLocation().getWorld()).getHandle();
+			// Thanks Sashie for this
+			Method worldServer = getClass("org.bukkit.craftbukkit", "CraftWorld").getMethod("getHandle", (Class<?>[]) new Class[0]);
+			Field world = getClass("net.minecraft.server", "WorldBorder").getField("world");
+			world.set(wb, worldServer.invoke(p.getWorld()));
 			
 			center.invoke(wb, p.getLocation().getX(), p.getLocation().getY());
 			distance.invoke(wb, dist);
 			time.invoke(wb, 15);
 			movement.invoke(wb, oldradius, newradius, delay);
 			
-			Object packet = constructor.newInstance(worldborder, constant);
+			Object packet = constructor.newInstance(wb, constant);
 			sendPacket.invoke(player_connection.get(handle.invoke(p)), packet);
 		} catch(Exception x) {
 			x.printStackTrace();
