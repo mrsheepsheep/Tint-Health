@@ -44,8 +44,6 @@ public final class TintHealth extends JavaPlugin {
         if (enabled)
             new PlayerListener(this);
         getCommand("tinthealth").setExecutor(new THCommand(this));
-    
-        Bukkit.getLogger().info(THAPI.isTHEnabled() + " / " + THAPI.getIntensityModifier());
     }
     
     @Override
