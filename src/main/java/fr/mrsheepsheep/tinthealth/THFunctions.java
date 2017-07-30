@@ -18,6 +18,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 
+// Todo: get rid of this
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import net.minecraft.server.v1_12_R1.WorldBorder;
+
 public class THFunctions {
 	
 	private static Method handle, sendPacket;
@@ -27,7 +32,7 @@ public class THFunctions {
 	private static Object constant;
 	
 	static {
-	    try {
+		try {
 			handle = getClass("org.bukkit.craftbukkit", "entity.CraftPlayer").getMethod("getHandle");
 			player_connection = getClass("net.minecraft.server", "EntityPlayer").getField("playerConnection");
 			for (Method m : getClass("net.minecraft.server", "PlayerConnection").getMethods()) {
@@ -45,21 +50,10 @@ public class THFunctions {
 			constructor = getClass("net.minecraft.server", "PacketPlayOutWorldBorder").getConstructor(getClass("net.minecraft.server", "WorldBorder"), enumclass);
 			border_constructor = getClass("net.minecraft.server", "WorldBorder").getConstructor();
 			
-			Method[] methods = getClass("net.minecraft.server", "WorldBorder").getMethods();
-
 			String setCenter = "setCenter";
 			String setWarningDistance = "setWarningDistance";
 			String setWarningTime = "setWarningTime";
 			String transitionSizeBetween = "transitionSizeBetween";
-			
-			if (!inClass(methods, setCenter))
-				setCenter = "c";
-			if (!inClass(methods, setWarningDistance))
-				setWarningDistance = "c";
-			if (!inClass(methods, setWarningTime))
-				setWarningTime = "b";
-			if (!inClass(methods, transitionSizeBetween))
-				transitionSizeBetween = "a";
 			
 			center = getClass("net.minecraft.server", "WorldBorder").getMethod(setCenter, double.class, double.class);
 			distance = getClass("net.minecraft.server", "WorldBorder").getMethod(setWarningDistance, int.class);
@@ -72,9 +66,9 @@ public class THFunctions {
 					break;
 				}
 			}
-	    } catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 	
 	private static boolean inClass(Method[] methods, String methodName){
@@ -123,11 +117,16 @@ public class THFunctions {
 //			New Reflection Version
 //		
 		try {
+			// Todo: Reflection stuff
 			Object worldborder = border_constructor.newInstance();
-			center.invoke(worldborder, p.getLocation().getX(), p.getLocation().getY());
-			distance.invoke(worldborder, dist);
-			time.invoke(worldborder, 15);
-			movement.invoke(worldborder, oldradius, newradius, delay);
+			
+			WorldBorder wb = (WorldBorder) worldborder;
+			wb.world = ((CraftWorld)((CraftPlayer) p).getHandle().getBukkitEntity().getLocation().getWorld()).getHandle();
+			
+			center.invoke(wb, p.getLocation().getX(), p.getLocation().getY());
+			distance.invoke(wb, dist);
+			time.invoke(wb, 15);
+			movement.invoke(wb, oldradius, newradius, delay);
 			
 			Object packet = constructor.newInstance(worldborder, constant);
 			sendPacket.invoke(player_connection.get(handle.invoke(p)), packet);

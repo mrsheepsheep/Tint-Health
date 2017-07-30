@@ -1,5 +1,5 @@
 name: TintHealth
-version: ${project.version}
+version: 1.4.7
 main: fr.mrsheepsheep.tinthealth.TintHealth
 authors: [MrSheepSheep, MrCookieSlime]
 description: Blood screen effects !

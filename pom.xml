@@ -14,7 +14,7 @@
 
     <groupId>fr.mrsheepsheep</groupId>
     <artifactId>TintHealth</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.7</version>
     <packaging>jar</packaging>
 
     <name>TintHealth</name>
@@ -48,19 +48,15 @@
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.10.2-R0.1-SNAPSHOT</version>
+            <artifactId>spigot</artifactId>
+            <version>1.12-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
